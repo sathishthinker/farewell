@@ -28,18 +28,8 @@ def init_db():
                 created_at TEXT   NOT NULL
             )
         ''')
-        # Seed with 3 initial entries if table is empty
-        count = conn.execute('SELECT COUNT(*) FROM entries').fetchone()[0]
-        if count == 0:
-            seeds = [
-                
-            ]
-            for name, typ, msg in seeds:
-                conn.execute(
-                    'INSERT INTO entries (name, type, message, created_at) VALUES (?, ?, ?, ?)',
-                    (name, typ, msg, datetime.utcnow().isoformat())
-                )
-        conn.commit()
+      
+        
 
 # ─── ROUTES ──────────────────────────────────────────────────────────────────
 
