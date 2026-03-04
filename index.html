@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sathish's Epic Farewell 🚀</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #16151f;
+    --surface: #21203a;
+    --surface2: #2a2945;
+    --gold: #f5c842;
+    --orange: #ff7043;
+    --teal: #26c6da;
+    --pink: #f06292;
+    --text: #f5f3ff;
+    --muted: #b8b5d4;
+    --star-glow: #ffe082;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 14px; height: 14px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background 0.2s;
+    mix-blend-mode: screen;
+  }
+  .cursor-trail {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.08s ease;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 18px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(22,21,31,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(245,200,66,0.1);
+  }
+  nav .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--gold); letter-spacing: 0.05em; }
+  nav ul { list-style: none; display: flex; gap: 32px; }
+  nav ul li a {
+    color: var(--muted); text-decoration: none; font-size: 0.85rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--gold); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; text-align: center; padding: 120px 20px 60px;
+  }
+  #hero canvas { position: absolute; inset: 0; z-index: 0; }
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(245,200,66,0.12);
+    border: 1px solid rgba(245,200,66,0.35);
+    color: var(--gold);
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 7px 18px; border-radius: 99px; margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 800; line-height: 0.95;
+    background: linear-gradient(135deg, #f5c842 0%, #ff7043 50%, #f06292 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeUp 0.9s 0.1s ease both;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--muted); font-weight: 300;
+    animation: fadeUp 1s 0.2s ease both;
+    margin-bottom: 10px;
+  }
+  .hero-years {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--teal); animation: fadeUp 1s 0.3s ease both;
+    margin-bottom: 40px;
+  }
+  .hero-friends {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 99px;
+    padding: 8px 22px;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 30px;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .hero-friends strong { color: var(--gold); }
+  .hero-scroll {
+    animation: fadeUp 1s 0.5s ease both;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* SECTIONS common */
+  section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800; line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .section-desc { color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 50px; }
+
+  /* TIMELINE */
+  #timeline { max-width: 900px; }
+  .timeline-list { position: relative; padding-left: 40px; }
+  .timeline-list::before {
+    content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--orange), var(--teal), var(--pink));
+  }
+  .tl-item {
+    position: relative; margin-bottom: 44px;
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+  .tl-dot {
+    position: absolute; left: -34px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--bg);
+    box-shadow: 0 0 10px var(--gold);
+  }
+  .tl-year { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+  .tl-heading { font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
+  .tl-text { color: var(--muted); line-height: 1.65; font-size: 0.95rem; }
+  .tl-emoji { font-size: 1.4rem; margin-right: 8px; }
+
+  /* ROAST & TOAST
+  #memory { background: none; }
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px; margin-bottom: 40px;
+  }
+  .sticky {
+    border-radius: 16px; padding: 22px;
+    font-size: 0.92rem; line-height: 1.65;
+    position: relative; overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    animation: fadeUp 0.5s ease both;
+    cursor: default;
+  }
+  .sticky:hover { transform: rotate(0deg) scale(1.04) translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+  .sticky .pin {
+    position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+    width: 14px; height: 14px; background: #ccc; border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .sticky .author { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.85rem; margin-top: 14px; opacity: 0.8; }
+  .sticky-yellow { background: #fef08a; color: #3d3400; transform: rotate(-1.5deg); }
+  .sticky-pink   { background: #fbcfe8; color: #5b1030; transform: rotate(1deg); }
+  .sticky-green  { background: #bbf7d0; color: #064e20; transform: rotate(-0.5deg); }
+  .sticky-blue   { background: #bae6fd; color: #0c2a4a; transform: rotate(1.5deg); }
+  .sticky-orange { background: #fed7aa; color: #5a2400; transform: rotate(-1deg); }
+
+  /* ADD NOTE FORM */
+  .add-note-form {
+    background: var(--surface);
+    border: 1px solid rgba(245,200,66,0.15);
+    border-radius: 20px; padding: 36px;
+    max-width: 560px; margin: 0 auto;
+  }
+  .add-note-form h3 { font-family: 'Syne', sans-serif; font-size: 1.3rem; margin-bottom: 20px; }
+  .form-row { display: flex; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+  .form-group { flex: 1; min-width: 160px; }
+  .form-group label { display: block; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; background: var(--surface2);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+    color: var(--text); font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 0.95rem; padding: 12px 14px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group select option { background: var(--surface2); }
+  .btn-submit {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    color: #1a0a00; font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 1rem; border: none;
+    border-radius: 10px; cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    margin-top: 6px;
+  }
+  .btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* YEARBOOK */
+  #yearbook { padding: 100px 40px; }
+  .yearbook-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .yb-card {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px; padding: 24px;
+    text-align: center;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    opacity: 0; transform: translateY(20px);
+    position: relative; overflow: hidden;
+  }
+  .yb-card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s, transform 0.5s, border-color 0.25s, box-shadow 0.25s; }
+  .yb-card:hover { transform: translateY(-6px) scale(1.02); border-color: var(--gold); box-shadow: 0 12px 40px rgba(245,200,66,0.12); }
+  .yb-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin: 0 auto 14px;
+    border: 2px solid rgba(255,255,255,0.1);
+  }
+  .yb-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+  .yb-role { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .yb-superlative {
+    display: inline-block;
+    background: rgba(245,200,66,0.1); border: 1px solid rgba(245,200,66,0.25);
+    color: var(--gold); font-size: 0.72rem; padding: 4px 10px;
+    border-radius: 99px; margin-bottom: 12px; letter-spacing: 0.04em;
+  }
+  .yb-note { font-size: 0.82rem; color: var(--muted); line-height: 1.55; font-style: italic; }
+
+  /* ROAST & TOAST */
+  #roast { text-align: center; padding: 100px 40px; }
+  .rt-tabs { display: flex; gap: 0; justify-content: center; margin-bottom: 40px; border-radius: 99px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); display: inline-flex; }
+  .rt-tab {
+    padding: 12px 36px; font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.9rem; cursor: pointer; border: none; background: transparent;
+    color: var(--muted); transition: all 0.2s; letter-spacing: 0.05em;
+  }
+  .rt-tab.active-roast { background: #ff4444; color: #fff; }
+  .rt-tab.active-toast { background: var(--gold); color: #1a0a00; }
+  .rt-form { max-width: 500px; margin: 0 auto; }
+  .rt-form textarea {
+    width: 100%; background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; color: var(--text);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 1rem; padding: 18px; outline: none;
+    resize: vertical; min-height: 120px;
+    transition: border-color 0.2s; margin-bottom: 14px;
+  }
+  .rt-form textarea:focus { border-color: var(--gold); }
+  .rt-form input {
+    width: 100%; background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; color: var(--text);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 0.95rem; padding: 12px 14px; outline: none;
+    transition: border-color 0.2s; margin-bottom: 14px;
+  }
+  .rt-form input:focus { border-color: var(--gold); }
+
+  .rt-wall { display: flex; flex-direction: column; gap: 14px; max-width: 700px; margin: 40px auto 0; text-align: left; }
+  .rt-entry {
+    background: var(--surface2); border-radius: 14px; padding: 18px 22px;
+    border-left: 4px solid var(--gold);
+    animation: fadeUp 0.4s ease both;
+  }
+  .rt-entry.is-roast { border-left-color: #ff4444; }
+  .rt-entry.is-toast { border-left-color: var(--gold); }
+  .rt-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .rt-entry-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .rt-entry-badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 99px; }
+  .badge-roast { background: rgba(255,68,68,0.15); color: #ff4444; }
+  .badge-toast { background: rgba(245,200,66,0.15); color: var(--gold); }
+  .rt-entry-text { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+  /* LETTER */
+  #letter { max-width: 780px; text-align: center; }
+  .letter-card {
+    background: var(--surface2);
+    border: 1px solid rgba(245,200,66,0.22);
+    border-radius: 24px; padding: 56px;
+    position: relative; overflow: hidden;
+    text-align: left;
+  }
+  .letter-card::before {
+    content: '"'; font-family: Georgia, serif; font-size: 16rem; line-height: 1;
+    color: rgba(245,200,66,0.05); position: absolute; top: -40px; left: 20px;
+    pointer-events: none;
+  }
+  .letter-card p {
+    font-size: 1.05rem; line-height: 1.9; color: #e8e5f5; margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .letter-sign {
+    font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
+    color: var(--gold); margin-top: 30px;
+  }
+  .letter-title { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 60px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    color: var(--muted); font-size: 0.85rem;
+  }
+  footer .footer-big {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 800; color: var(--text); margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.3); }
+  }
+
+  /* Divider */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(245,200,66,0.2), transparent);
+    margin: 0 auto;
+  }
+
+  /* Toast notification */
+  .toast-notif {
+    position: fixed; bottom: 30px; right: 30px; z-index: 1000;
+    background: var(--gold); color: #1a0a00;
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    padding: 14px 22px; border-radius: 12px;
+    transform: translateY(100px); opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba(245,200,66,0.4);
+  }
+  .toast-notif.show { transform: translateY(0); opacity: 1; }
+
+  @media (max-width: 640px) {
+    nav ul { display: none; }
+    section { padding: 60px 20px; }
+    .letter-card { padding: 30px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+<div class="toast-notif" id="toastNotif">✅ Added successfully!</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Sathish ✦ Farewell</div>
+  <ul>
+    <li><a href="#timeline">Journey</a></li>
+    <li><a href="#roast">Roast & Toast</a></li>
+    <li><a href="#letter">Letter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">✦ July 27, 2021 → March 11, 2026 · HCLTech · Senior Analyst</div>
+    <h1 class="hero-title">See Ya,<br>HCLTech 👋</h1>
+    <p class="hero-sub">Sathish's Account is Being Deprovisioned Today 🔐</p>
+    <p class="hero-years">2021 — 2026 · Senior Analyst · Access &amp; Provisioning</p>
+    <div class="hero-friends">👯 Special shoutout to my friends — <strong>Pandia</strong> &amp; <strong>Karthiga</strong> 🤍</div>
+    <div class="hero-scroll">
+      <span>scroll to explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <p class="section-label">Chapter by Chapter</p>
+  <h2 class="section-title">The Journey 🗺️</h2>
+  <p class="section-desc">From July 27, 2021 to March 11, 2026 — nearly 5 years of Access &amp; Provisioning work, escalations handled, friendships made, and Power Automate flows that changed how the team operates. Here's how it all went down.</p>
+  <div class="timeline-list" id="timelineList">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <p class="tl-year">July 27, 2021 — Day One</p>
+      <h3 class="tl-heading"><span class="tl-emoji">🐣</span>Entered HCLTech</h3>
+      <p class="tl-text">Walked through the doors on July 27th as a fresh Senior Analyst, slightly nervous, fully committed. The world of Access &amp; Provisioning opened up fast — onboarding flows, role assignments, entitlement reviews, access certifications. Complex, meticulous, and completely absorbing. This is where the story began.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--orange);box-shadow:0 0 10px var(--orange)"></div>
+      <p class="tl-year">2022 — Making Friends & Handling Escalations</p>
+      <h3 class="tl-heading"><span class="tl-emoji">🤝</span>Friendships Forged Under Fire</h3>
+      <p class="tl-text">Nothing bonds a team faster than escalations. While tickets flew and pressure mounted, I found my people. Through the chaos of urgent requests and tricky access issues, real friendships were built — the kind that survive even the most painful audit season.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--teal);box-shadow:0 0 10px var(--teal)"></div>
+      <p class="tl-year">2023 — Getting Hands-On With Peers</p>
+      <h3 class="tl-heading"><span class="tl-emoji">⚙️</span>Learning by Doing, Together</h3>
+      <p class="tl-text">This was the year of getting truly hands-on — understanding how employee onboarding and termination flows really work, tracing access paths, managing role conflicts, and learning from peers who knew the system inside out. Hands-on experience earned through real provisioning challenges, not manuals. Every access request resolved together made the knowledge stick.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--pink);box-shadow:0 0 10px var(--pink)"></div>
+      <p class="tl-year">2024 — Discovering Power Automate</p>
+      <h3 class="tl-heading"><span class="tl-emoji">🔬</span>The Research Phase Begins</h3>
+      <p class="tl-text">Started asking: "What if we could automate this?" Dove deep into Power Automate research — exploring how workflows could eliminate manual bottlenecks and transform how the IAM team operates. The seed of something big was planted this year.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--gold);box-shadow:0 0 14px var(--gold)"></div>
+      <p class="tl-year">2025 — The Workflow Revolution</p>
+      <h3 class="tl-heading"><span class="tl-emoji">🚀</span>Built Workflows That Changed Everything</h3>
+      <p class="tl-text">This was the year of building — lots and lots of it. Delivered game-changing Power Automate workflows: <strong>Emergency Termination</strong> flows, <strong>Rescind Emails</strong>, <strong>Handover Mail</strong> automation, and <strong>Mail Alerts from Higher Officials</strong>. Every single one cut manual effort and improved team efficiency in a real, measurable way. This is the work I'm most proud of — and it keeps running long after my account gets deprovisioned.</p>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#c8b4ff;box-shadow:0 0 14px #c8b4ff"></div>
+      <p class="tl-year">March 11, 2026 — Last Working Day</p>
+      <h3 class="tl-heading"><span class="tl-emoji">🌅</span>Session Ended. Legacy Lives On.</h3>
+      <p class="tl-text">They say all good things must come to an end — but this isn't an end, it's a new beginning. Today my account gets deprovisioned, but the workflows keep running, the access policies remain in place, and the gratitude is permanent. Thank you all. Every single one of you. It's been the honour of a career.</p>
+    </div>
+  </div>
+
+  <!-- SPECIAL THANKS -->
+  <div style="margin-top:60px;background:linear-gradient(135deg,rgba(245,200,66,0.14),rgba(255,112,67,0.10));border:1px solid rgba(245,200,66,0.25);border-radius:20px;padding:40px;max-width:700px;">
+    <p style="font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">✦ Special Thanks</p>
+    <h3 style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:12px;">Mohd Izhar Saifi 👑</h3>
+    <p style="color:#d4d0c8;font-size:1rem;line-height:1.8;margin-bottom:10px;">My Manager. My biggest believer.</p>
+    <p style="color:var(--muted);font-size:0.95rem;line-height:1.8;">You saw potential in me when I was still figuring things out, and you backed it with action — giving me <span style="color:var(--gold);font-weight:600;">top ratings two consecutive years</span> in a row. That kind of confidence from a manager doesn't just motivate — it transforms. I carry that belief into everything I do next. Thank you, Izhar. Truly.</p>
+    <p style="margin-top:18px;font-size:1.4rem;">🙏</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+
+<!-- ROAST & TOAST -->
+<section id="roast">
+  <p class="section-label">Say What You Really Think</p>
+  <h2 class="section-title">Roast & Toast 🔥🥂</h2>
+  <p class="section-desc" style="max-width:500px;margin:0 auto 30px;">Roast Sathish with love, or raise a toast to the work we did together. Both are welcome here.</p>
+  <div class="rt-tabs">
+    <button class="rt-tab active-toast" id="tab-toast" onclick="setTab('toast')">🥂 Toast</button>
+    <button class="rt-tab" id="tab-roast" onclick="setTab('roast')">🔥 Roast</button>
+  </div>
+  <div class="rt-form">
+    <input type="text" id="rtName" placeholder="Your name">
+    <textarea id="rtText" placeholder="Write your roast or toast here..."></textarea>
+    <button class="btn-submit" id="rtSubmitBtn" onclick="addRT()" style="background:linear-gradient(135deg,var(--gold),var(--orange))">🥂 Submit Toast</button>
+  </div>
+  <div class="rt-wall" id="rtWall"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAREWELL LETTER -->
+<section id="letter">
+  <p class="section-label">From the Heart</p>
+  <h2 class="section-title">A Letter to My Team 💌</h2>
+  <p class="section-desc" style="max-width:560px;margin:0 auto 40px;">Nearly 5 years. One team. Thank you all.</p>
+  <div class="letter-card">
+    <p>Dear HCLTech Access &amp; Provisioning family,</p>
+    <p>July 27, 2021 — my access was granted, my journey began as a Senior Analyst at HCLTech. Today, March 11, 2026, that account gets deprovisioned. But what happened in between? That's what I want to talk about.</p>
+    <p>In 2022, I found my footing — and my people. Escalations kept us busy, but they also introduced me to <strong>Pandia</strong> and <strong>Karthiga</strong>, who made the day-to-day genuinely enjoyable. In 2023, I got truly hands-on with the provisioning systems — understanding how every employee onboards and terminates, how access gets granted, reviewed, and revoked. That year turned theory into expertise.</p>
+    <p>In 2024, I started asking the question that changed everything: what if we could automate the parts that slow us down? I researched, tested, and mapped out what Power Automate could do for this team. And in 2025, it all came together — Emergency Termination workflows, Rescind Email flows, Handover Mail automation, and Higher Official Mail Alerts. I genuinely believe these workflows made the team more efficient. That contribution means everything to me.</p>
+    <p>A special word for <strong style="color:var(--gold)">Mohd Izhar Saifi</strong> — my manager, my champion. You believed in me, backed it with top ratings two consecutive years, and gave me the space to grow. That is not a small thing. I carry that forward with gratitude.</p>
+    <p>To every single person on this team — thank you all. Not for the memories, but for the work we did together, the problems we solved, and the standard we held. Access &amp; Provisioning isn't glamorous work, but we made it matter.</p>
+    <p>My account is being deprovisioned today — but my respect for this team has no expiry date. 🔐</p>
+    <p>With all the gratitude in the world,</p>
+    <div class="letter-sign">Sathish 🚀</div>
+    <div class="letter-title">Access &amp; Provisioning Engineer · HCLTech · July 27, 2021 → March 11, 2026</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-big">Until We Meet Again 👋</div>
+  <p>Made with ❤️ by Sathish · HCLTech Access &amp; Provisioning · July 2021 – March 2026</p>
+  <p style="margin-top:8px;font-size:0.75rem;opacity:0.5;">Account Deprovisioned. It's been a privilege. Thank you all. 🔐</p>
+</footer>
+
+<script>
+// ─── STATE ──────────────────────────────────────────────────────────────────
+let activeTab = 'toast';
+const API = '/api/entries';
+
+// ─── CURSOR ─────────────────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursorTrail');
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 7 + 'px';
+  cursor.style.top  = my - 7 + 'px';
+  setTimeout(() => {
+    trail.style.left = mx - 18 + 'px';
+    trail.style.top  = my - 18 + 'px';
+  }, 60);
+});
+
+// ─── HERO CANVAS ────────────────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('heroCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  for (let i = 0; i < 180; i++) {
+    particles.push({
+      x: Math.random(), y: Math.random(),
+      r: Math.random() * 1.6 + 0.3,
+      speed: Math.random() * 0.00015 + 0.00005,
+      opacity: Math.random() * 0.7 + 0.2,
+      twinkleSpeed: Math.random() * 0.02 + 0.005,
+      twinklePhase: Math.random() * Math.PI * 2,
+    });
+  }
+  let t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    t += 0.016;
+    particles.forEach(p => {
+      p.y -= p.speed;
+      if (p.y < 0) p.y = 1;
+      const tw = p.opacity + Math.sin(t * p.twinkleSpeed * 60 + p.twinklePhase) * 0.3;
+      ctx.beginPath();
+      ctx.arc(p.x * canvas.width, p.y * canvas.height, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 235, 140, ${Math.max(0.18, tw)})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── ROAST & TOAST ──────────────────────────────────────────────────────────
+function setTab(tab) {
+  activeTab = tab;
+  document.getElementById('tab-toast').className = 'rt-tab' + (tab === 'toast' ? ' active-toast' : '');
+  document.getElementById('tab-roast').className = 'rt-tab' + (tab === 'roast' ? ' active-roast' : '');
+  const btn = document.getElementById('rtSubmitBtn');
+  btn.textContent = tab === 'toast' ? '🥂 Submit Toast' : '🔥 Submit Roast';
+  btn.style.background = tab === 'toast'
+    ? 'linear-gradient(135deg,var(--gold),var(--orange))'
+    : 'linear-gradient(135deg,#ff4444,#ff7043)';
+  document.getElementById('rtText').placeholder = tab === 'toast'
+    ? 'Write a heartfelt toast for Sathish...'
+    : 'Write a loving (!) roast for Sathish...';
+}
+
+function renderRT(entries) {
+  const wall = document.getElementById('rtWall');
+  if (!entries.length) {
+    wall.innerHTML = '<p style="text-align:center;color:var(--muted);padding:30px">Be the first to leave a roast or toast! 🎉</p>';
+    return;
+  }
+  wall.innerHTML = entries.map(e => `
+    <div class="rt-entry is-${e.type}" style="animation:fadeUp 0.4s ease both">
+      <div class="rt-entry-header">
+        <span class="rt-entry-name">${escHtml(e.name)}</span>
+        <span class="rt-entry-badge badge-${e.type}">${e.type === 'roast' ? '🔥 Roast' : '🥂 Toast'}</span>
+      </div>
+      <div class="rt-entry-text">${escHtml(e.message || e.text || '')}</div>
+    </div>
+  `).join('');
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function loadEntries() {
+  const wall = document.getElementById('rtWall');
+  wall.innerHTML = '<p style="text-align:center;color:var(--muted);padding:30px">Loading... ✨</p>';
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error('Server error');
+    const data = await res.json();
+    renderRT(data);
+  } catch (err) {
+    wall.innerHTML = '<p style="text-align:center;color:#ff7043;padding:30px">Could not load entries. Is the server running? 🤔</p>';
+  }
+}
+
+async function addRT() {
+  const nameEl = document.getElementById('rtName');
+  const textEl = document.getElementById('rtText');
+  const btn    = document.getElementById('rtSubmitBtn');
+  const name   = nameEl.value.trim();
+  const text   = textEl.value.trim();
+
+  if (!name || !text) { showToast('Please fill in your name and message! 📝'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  try {
+    const res = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, type: activeTab, message: text })
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || 'Server error');
+    }
+    nameEl.value = '';
+    textEl.value = '';
+    showToast(activeTab === 'toast' ? '🥂 Toast raised!' : '🔥 Roast submitted!');
+    await loadEntries(); // refresh the wall
+  } catch (err) {
+    showToast('❌ Error: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    setTab(activeTab); // restore button label
+  }
+}
+
+// ─── TOAST NOTIFICATION ─────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toastNotif');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ─── SCROLL ANIMATIONS ───────────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.tl-item, .yb-card').forEach(el => observer.observe(el));
+
+// ─── INIT ───────────────────────────────────────────────────────────────────
+setTab('toast');
+loadEntries();
+</script>
+</body>
+</html>
