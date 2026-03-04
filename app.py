@@ -32,12 +32,7 @@ def init_db():
         count = conn.execute('SELECT COUNT(*) FROM entries').fetchone()[0]
         if count == 0:
             seeds = [
-                ('Team HCL', 'toast',
-                 'To Sathish — nearly 5 years of provisioning brilliance and workflows that genuinely made us all better. Cheers to the next chapter! 🥂'),
-                ('Anonymous Colleague', 'roast',
-                 'Sathish once traced an access conflict back through 6 nested roles and explained every single step. We asked a quick question. He gave us a masterclass. We never recovered. 🔥'),
-                ('The Provisioning Team', 'toast',
-                 'Your Emergency Termination workflow saved us hours every single time. You built something the whole team relies on. That says everything about who you are. ❤️'),
+                
             ]
             for name, typ, msg in seeds:
                 conn.execute(
